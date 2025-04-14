@@ -1,0 +1,26 @@
+{
+  "name": "sumerian-conjugator-res",
+  "version": "0.0.0",
+  "author": "Claude Barde",
+  "dependencies": {
+    "@babel/core": "^7.26.10",
+    "@babel/preset-env": "^7.26.9",
+    "@glennsl/rescript-jest": "^0.11.0",
+    "@rescript/core": "1.6.1",
+    "babel-jest": "^29.7.0",
+    "rescript": "11.1.4"
+  },
+  "keywords": [
+    "rescript"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "res:build": "rescript",
+    "res:clean": "rescript clean",
+    "res:dev": "rescript -w",
+    "test": "rescript && NODE_OPTIONS=--experimental-vm-modules jest --config jest.config.mjs"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

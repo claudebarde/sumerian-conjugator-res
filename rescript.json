@@ -1,0 +1,21 @@
+{
+  "name": "sumerian-conjugator-res",
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": true
+    },
+    {
+      "dir": "tests",
+      "type": "dev"
+    }
+  ],
+  "package-specs": {
+    "module": "esmodule",
+    "in-source": false
+  },
+  "suffix": ".res.mjs",
+  "bs-dependencies": ["@rescript/core"],
+  "bs-dev-dependencies": ["@glennsl/rescript-jest"],
+  "bsc-flags": ["-open RescriptCore"]
+}
