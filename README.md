@@ -25,6 +25,8 @@ let output =
 ```
 
 ```res
+open FiniteVerb;
+
 let stem = "kar";
 let output =
     new(stem)
