@@ -77,7 +77,7 @@ describe("TUKU verb", () => {
             new(stem)
             -> isImperfective(Some(Other("tuktuku")))
             -> isTransitive
-            -> setSubject(ThirdPlHuman)
+            -> setSubject(ThirdPlurHuman)
             -> setObject(ThirdSingNonHuman)
             -> setPreformative(I)
             -> print;
@@ -108,7 +108,7 @@ describe("TUKU verb", () => {
             -> isTransitive
             -> setSubject(ThirdSingHuman)
             -> setObject(ThirdSingNonHuman)
-            -> setComitative(Some(FirstPl))
+            -> setComitative(Some(FirstPlur))
             -> print;
         expect(output) -> toEqual(Ok(expected))
     })

@@ -42,7 +42,8 @@ let output =
 
 Finally, the `print` method puts all the elements together and output a string with the final verb.
 
-> WARNING: for now, you must set the perfective and transitive properties of the verb before the subject and object to get the right order of prefixes and suffixes.
+> WARNING 1: for now, you must set the perfective and transitive properties of the verb before the subject and object to get the right order of prefixes and suffixes.
+> WARNING 2: for the same reason, the oblique object must be set after setting the transitivity of the verb and the subject or object. Hot swapping these values will available in a later version of the app.
 
 ## Tests
 

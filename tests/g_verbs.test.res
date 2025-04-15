@@ -42,19 +42,34 @@ describe("ĜAR verb", () => {
         expect(output) -> toEqual(Ok(expected))
     })
 
-    // let expected = "baaĝar";
-    // test(expected, () => {
-    //     // They were placed on it 21.2 (7)
-    //     let output =
-    //         new(stem)
-    //         -> isPerfective
-    //         -> isTransitive
-    //         -> setSubject(ThirdSingNonHuman)
-    //         -> setIndirectObject(ThirdSingNonHuman)
-    //         -> setMiddlePrefix
-    //         -> print;
-    //     expect(output) -> toEqual(Ok(expected))
-    // })
+    let expected = "baaĝar";
+    test(expected, () => {
+        // They were placed on it 21.2 (7)
+        let output =
+            new(stem)
+            -> isPerfective
+            -> isIntransitive
+            -> setSubject(ThirdPlurNonHuman)
+            -> setLocativeOn(None)
+            -> setMiddlePrefix
+            -> print;
+        expect(output) -> toEqual(Ok(expected))
+    })
+
+    let expected = "inninĝar";
+    test(expected, () => {
+        // He placed it on him 18.1 (3)
+        let output =
+            new(stem)
+            -> isPerfective
+            -> isTransitive
+            -> setSubject(ThirdSingHuman)
+            -> setObject(ThirdSingNonHuman)
+            -> setObliqueObject(ThirdSingHuman)
+            -> setPreformative(I)
+            -> print;
+        expect(output) -> toEqual(Ok(expected))
+    })
 });
 
 describe("ĜEN verb", () => {
@@ -143,8 +158,8 @@ describe("GUB verb", () => {
             new(stem)
             -> isPerfective
             -> isIntransitive
-            -> setSubject(ThirdPlNonHuman)
-            -> setIndirectObject(ThirdPlHuman)
+            -> setSubject(ThirdPlurNonHuman)
+            -> setIndirectObject(ThirdPlurHuman)
             -> setMiddlePrefix
             -> print;
         expect(output) -> toEqual(Ok(expected))

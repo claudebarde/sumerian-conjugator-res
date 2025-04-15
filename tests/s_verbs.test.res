@@ -16,7 +16,7 @@ describe("SA verb", () => {
             -> setSubject(ThirdSingHuman)
             -> setObject(ThirdSingHuman)
             -> setPreformative(I)
-            -> setTerminative(Some(ThirdPlHuman))
+            -> setTerminative(Some(ThirdPlurHuman))
             -> print;
         expect(output) -> toEqual(Ok(expected))
     })
@@ -42,6 +42,22 @@ describe("SIG-SIG verb", () => {
             -> print;
         expect(output) -> toEqual(Ok(expected))
     })
+
+    let expected = "imminsig-sig";
+    test(expected, () => {
+        // He loaded it on them 20.1 (2b)
+        let output =
+            new(stem)
+            -> isPerfective
+            -> isTransitive
+            -> setSubject(ThirdSingHuman)
+            -> setObject(ThirdSingNonHuman)
+            -> setVentive
+            -> setLocativeOn(Some(ThirdPlurNonHuman))
+            -> setPreformative(I)
+            -> print;
+        expect(output) -> toEqual(Ok(expected))
+    })
 })
 
 describe("SUG verb", () => {
@@ -57,7 +73,7 @@ describe("SUG verb", () => {
             new(stem)
             -> isPerfective
             -> isIntransitive
-            -> setSubject(ThirdPlHuman)
+            -> setSubject(ThirdPlurHuman)
             -> setIndirectObject(ThirdSingNonHuman)
             -> print;
         expect(output) -> toEqual(Ok(expected))

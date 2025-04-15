@@ -13,8 +13,8 @@ describe("ZIG verb", () => {
             new(stem)
             -> isPerfective
             -> isIntransitive
-            -> setSubject(ThirdPlNonHuman)
-            -> setAblative(Some(ThirdPlNonHuman))
+            -> setSubject(ThirdPlurNonHuman)
+            -> setAblative(Some(ThirdPlurNonHuman))
             -> setPreformative(I)
             -> print;
         expect(output) -> toEqual(Ok(expected))

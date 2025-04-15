@@ -1,3 +1,13 @@
+type personParam =
+    | FirstSing
+    | SecondSing
+    | ThirdSingHuman
+    | ThirdSingNonHuman
+    | FirstPlur
+    | SecondPlur
+    | ThirdPlurHuman
+    | ThirdPlurNonHuman
+    
 module FirstPrefix = {
     type t =
     | Modal

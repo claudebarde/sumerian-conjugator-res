@@ -22,16 +22,6 @@ open Infixes
 
 type t = VerbShared.verbForm;
 
-type personParam =
-    | FirstSing
-    | SecondSing
-    | ThirdSingHuman
-    | ThirdSingNonHuman
-    | FirstPl
-    | SecondPl
-    | ThirdPlHuman
-    | ThirdPlNonHuman
-
 type ipfvStem =
     | Reduplicate
     | EdMarker
@@ -42,6 +32,7 @@ let new = (stem: string): t => {
         stem,
         is_perfective: false,
         is_transitive: false,
+        obliqueObject: None,
         firstPrefix: None,
         preformative: None,
         coordinator: false,
@@ -106,10 +97,10 @@ let setTerminative = (verb: t, person: option<personParam>): t => {
         | Some(SecondSing) => Some(SecondSing)
         | Some(ThirdSingHuman) => Some(ThirdSingHuman)
         | Some(ThirdSingNonHuman) => Some(ThirdSingNonHuman)
-        | Some(FirstPl) => Some(FirstPlur)
-        | Some(SecondPl) => Some(SecondPlur)
-        | Some(ThirdPlHuman) => Some(ThirdPlurHuman)
-        | Some(ThirdPlNonHuman) => Some(ThirdPlurNonHuman)
+        | Some(FirstPlur) => Some(FirstPlur)
+        | Some(SecondPlur) => Some(SecondPlur)
+        | Some(ThirdPlurHuman) => Some(ThirdPlurHuman)
+        | Some(ThirdPlurNonHuman) => Some(ThirdPlurNonHuman)
         | None => None
     }
     {...verb, adverbial: Some(Terminative), initialPersonPrefix: ipp}
@@ -121,10 +112,10 @@ let setAblative = (verb: t, person: option<personParam>): t => {
         | Some(SecondSing) => Some(SecondSing)
         | Some(ThirdSingHuman) => Some(ThirdSingHuman)
         | Some(ThirdSingNonHuman) => Some(ThirdSingNonHuman)
-        | Some(FirstPl) => Some(FirstPlur)
-        | Some(SecondPl) => Some(SecondPlur)
-        | Some(ThirdPlHuman) => Some(ThirdPlurHuman)
-        | Some(ThirdPlNonHuman) => Some(ThirdPlurNonHuman)
+        | Some(FirstPlur) => Some(FirstPlur)
+        | Some(SecondPlur) => Some(SecondPlur)
+        | Some(ThirdPlurHuman) => Some(ThirdPlurHuman)
+        | Some(ThirdPlurNonHuman) => Some(ThirdPlurNonHuman)
         | None => None
     }
     {...verb, adverbial: Some(Ablative), initialPersonPrefix: ipp}
@@ -140,12 +131,23 @@ let setInitialPersonPrefix = (verb: t, ipp: personParam): t => {
         | SecondSing => SecondSing
         | ThirdSingHuman => ThirdSingHuman
         | ThirdSingNonHuman => ThirdSingNonHuman
-        | FirstPl => FirstPlur
-        | SecondPl => SecondPlur
-        | ThirdPlHuman => ThirdPlurHuman
-        | ThirdPlNonHuman => ThirdPlurNonHuman
+        | FirstPlur => FirstPlur
+        | SecondPlur => SecondPlur
+        | ThirdPlurHuman => ThirdPlurHuman
+        | ThirdPlurNonHuman => ThirdPlurNonHuman
     }
     {...verb, initialPersonPrefix: Some(prefix)}
+}
+
+let setFinalPersonPrefix = (verb: t, pp: personParam): t => {
+    let prefix: finalPersonPrefix = switch pp {
+        | FirstSing => FirstSing
+        | SecondSing => SecondSing
+        | ThirdSingHuman => ThirdSingHuman
+        | ThirdSingNonHuman => ThirdSingNonHuman
+        | _ => %todo("TODO: add final person prefixes for the plural")
+    }
+    {...verb, finalPersonPrefix: Some(prefix)}
 }
 
 let setIndirectObject = (verb: t, ipp: personParam): t => {
@@ -154,10 +156,10 @@ let setIndirectObject = (verb: t, ipp: personParam): t => {
         | SecondSing => SecondSing
         | ThirdSingHuman => ThirdSingHuman
         | ThirdSingNonHuman => ThirdSingNonHuman
-        | FirstPl => FirstPlur
-        | SecondPl => SecondPlur
-        | ThirdPlHuman => ThirdPlurHuman
-        | ThirdPlNonHuman => ThirdPlurNonHuman
+        | FirstPlur => FirstPlur
+        | SecondPlur => SecondPlur
+        | ThirdPlurHuman => ThirdPlurHuman
+        | ThirdPlurNonHuman => ThirdPlurNonHuman
     }
     {...verb, indirectObjectPrefix: Some(prefix)}
 }
@@ -168,10 +170,10 @@ let setComitative = (verb: t, person: option<personParam>): t => {
         | Some(SecondSing) => Some(SecondSing)
         | Some(ThirdSingHuman) => Some(ThirdSingHuman)
         | Some(ThirdSingNonHuman) => Some(ThirdSingNonHuman)
-        | Some(FirstPl) => Some(FirstPlur)
-        | Some(SecondPl) => Some(SecondPlur)
-        | Some(ThirdPlHuman) => Some(ThirdPlurHuman)
-        | Some(ThirdPlNonHuman) => Some(ThirdPlurNonHuman)
+        | Some(FirstPlur) => Some(FirstPlur)
+        | Some(SecondPlur) => Some(SecondPlur)
+        | Some(ThirdPlurHuman) => Some(ThirdPlurHuman)
+        | Some(ThirdPlurNonHuman) => Some(ThirdPlurNonHuman)
         | None => None
     }
     {...verb, comitative: true, initialPersonPrefix: ipp}
@@ -198,10 +200,10 @@ let setSubject = (verb: t, person: personParam): t => {
             | SecondSing => Some(SecondSing)
             | ThirdSingHuman => Some(ThirdSingHuman)
             | ThirdSingNonHuman => Some(ThirdSingNonHuman)
-            | FirstPl => Some(FirstPlur)
-            | SecondPl => Some(SecondPlur)
-            | ThirdPlHuman => Some(ThirdPlurHuman)
-            | ThirdPlNonHuman => Some(ThirdPlurNonHuman)
+            | FirstPlur => Some(FirstPlur)
+            | SecondPlur => Some(SecondPlur)
+            | ThirdPlurHuman => Some(ThirdPlurHuman)
+            | ThirdPlurNonHuman => Some(ThirdPlurNonHuman)
         }
         {...verb, finalPersonSuffix: suffix}
     } else {
@@ -223,10 +225,10 @@ let setObject = (verb: t, person: personParam): t => {
             | SecondSing => Some(SecondSing)
             | ThirdSingHuman => Some(ThirdSingHuman)
             | ThirdSingNonHuman => Some(ThirdSingNonHuman)
-            | FirstPl => Some(FirstPlur)
-            | SecondPl => Some(SecondPlur)
-            | ThirdPlHuman => Some(ThirdPlurHuman)
-            | ThirdPlNonHuman => Some(ThirdPlurNonHuman)
+            | FirstPlur => Some(FirstPlur)
+            | SecondPlur => Some(SecondPlur)
+            | ThirdPlurHuman => Some(ThirdPlurHuman)
+            | ThirdPlurNonHuman => Some(ThirdPlurNonHuman)
         }
         {...verb, finalPersonSuffix: suffix}
     } else if verb.is_transitive && !verb.is_perfective {
@@ -243,6 +245,20 @@ let setObject = (verb: t, person: personParam): t => {
         // TODO: may be worth throwing an error here
         // but it will mess with the verb building with pipes
         verb
+    }
+}
+
+let setObliqueObject = (verb: t, person: personParam): t => {
+    // 18.2.1 Since a finite verbal form can contain at most one final person-prefix, the oblique
+    // object cannot be expressed with a final person-prefix if a verbal form already contains such a
+    // prefix for expressing the transitive subject or the direct object. If that is the case, that is to say,
+    // if a finite verbal form contains a final person-prefix expressing the transitive subject or the
+    // direct object, an oblique object is expressed with an initial person-prefix.
+    switch verb.finalPersonPrefix {
+        | Some(_) => 
+            { ...verb, obliqueObject: person -> Utils.fromPersonToIPP -> VerbShared.InitialPersonPrefix }
+        | None => 
+            { ...verb, obliqueObject:  person -> Utils.fromPersonToFPP -> VerbShared.FinalPersonPrefix }
     }
 }
 

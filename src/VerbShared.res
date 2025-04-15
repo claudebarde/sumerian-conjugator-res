@@ -1,9 +1,15 @@
 open Infixes
 
+type obliqueObject =
+    | FinalPersonPrefix(finalPersonPrefix)
+    | InitialPersonPrefix(initialPersonPrefix)
+    | None
+
 type verbForm = {
     stem: string,
     is_perfective: bool,
     is_transitive: bool,
+    obliqueObject: obliqueObject,
     firstPrefix: option<FirstPrefix.t>,
     preformative: option<preformative>,
     coordinator: bool,  // coordinator
