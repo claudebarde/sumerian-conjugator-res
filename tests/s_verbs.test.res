@@ -22,6 +22,28 @@ describe("SA verb", () => {
     })
 })
 
+describe("SA verb", () => {
+    open Expect;
+    open FiniteVerb;
+
+    let stem = "sá";
+
+    let expected = "absá";
+    test(expected, () => {
+        // It has been straightened out 18.2.2 (11b)
+        let output =
+            new(stem)
+            -> isPerfective
+            -> isIntransitive
+            -> setSubject(ThirdSingHuman)
+            -> setObject(ThirdSingNonHuman)
+            -> setPreformative(A)
+            -> setObliqueObject(ThirdSingNonHuman)
+            -> print;
+        expect(output) -> toEqual(Ok(expected))
+    })
+})
+
 describe("SIG-SIG verb", () => {
     open Expect;
     open FiniteVerb;

@@ -1,5 +1,26 @@
 open Jest;
 
+describe("TAG verb", () => {
+    open Expect;
+    open FiniteVerb;
+
+    let stem = "tag";
+
+    let expected = "bintag";
+    test(expected, () => {
+        // He let it touch them 18.2.2 (4)
+        let output =
+            new(stem)
+            -> isPerfective
+            -> isTransitive
+            -> setSubject(ThirdSingHuman)
+            -> setObject(ThirdSingNonHuman)
+            -> setObliqueObject(ThirdSingNonHuman)
+            -> print;
+        expect(output) -> toEqual(Ok(expected))
+    })
+})
+
 describe("TI verb", () => {
     open Expect;
     open FiniteVerb;

@@ -218,6 +218,8 @@ let addFinalPersonSuffix = (arr: result<t, string>, verb: VerbShared.verbForm): 
 }
 
 let addObliqueObject = (arr: result<t, string>, verb: VerbShared.verbForm): result<t, string> => {
+    // 18.2.1 Expressing an oblique object is only one possible use of the final person-prefixes, and it is
+    // the least important one. The final person-prefixes have two other uses, which have priority
     switch arr {
         | Error(err) => Error(err)
         | Ok(arr) => {
@@ -299,6 +301,26 @@ let markerByPos = (pos: int): option<markerName> => {
         | 13 => Some(FinalPersonSuffix)
         | 14 => Some(Subordinator)
         | _ => None
+    }
+}
+
+let markerToPos = (marker: markerName): int => {
+    switch marker {
+        | FirstPrefix => firstPrefixPos
+        | Preformative => preformativePos
+        | Coordinator => coordinatorPos
+        | Ventive => ventivePos
+        | MiddlePrefix => middlePrefixPos
+        | InitialPersonPrefix => initialPersonPrefixPos
+        | IndirectObjectPrefix => indirectObjectPrefixPos
+        | Comitative => comitativePos
+        | Adverbial => adverbialPos
+        | Locative => locativePos
+        | FinalPersonPrefix => finalPersonPrefixPos
+        | Stem => stemPos
+        | EdMarker => edMarkerPos
+        | FinalPersonSuffix => finalPersonSuffixPos
+        | Subordinator => subordinatorPos
     }
 }
 
@@ -680,7 +702,7 @@ let print = (verb: VerbShared.verbForm): result<string, string> => {
                                     } else {
                                         // VENTIVE CONTRACTION                                
                                         switch findNextMorpheme(outputArr, ventivePos) {
-                                            | Some((morpheme, _)) => {                                        
+                                            | Some((morpheme, marker)) => {                                        
                                                 // 22.2 Before the indirect-object prefix {ra}, the oblique-object prefix {ri},
                                                 // and the local prefix {ni}, however, the /u/ is always retained
                                                 // but may assimilate to the vowel of the following syllable.                                        
@@ -690,6 +712,11 @@ let print = (verb: VerbShared.verbForm): result<string, string> => {
                                                 } else if morpheme === "ra" {
                                                     let _ = outputArr[ventivePos] = "ma";
                                                     Ok(outputArr)
+                                                } else if morpheme === "bi" {
+                                                    // 18.2.2 If /bi/ follows the ventive prefix, the /b/ of /bi/ assimilates to the preceding /m/:
+                                                    let _ = outputArr[ventivePos] = "m";
+                                                    let _ = outputArr[markerToPos(marker)] = "mi";
+                                                    Ok(outputArr) 
                                                 } else {
                                                     // 22.2 The basic form of the ventive prefix is /mu/, 
                                                     // but the /u/ of the prefix is lost in the sequence /muCV/, that is, 
