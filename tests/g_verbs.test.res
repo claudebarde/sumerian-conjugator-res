@@ -7,7 +7,8 @@ describe("ĜAL verb", () => {
     let stem = "ĝal";
 
     let expectedVerb = "indaĝal";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // This is with him 16.2.2 (14a)
         let output =
@@ -18,7 +19,9 @@ describe("ĜAL verb", () => {
             -> setComitative(Some(ThirdSingHuman))
             -> setPreformative(I)
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 });
 
@@ -29,7 +32,8 @@ describe("ĜAR verb", () => {
     let stem = "ĝar";
 
     let expectedVerb = "ibtanĝar";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // He placed it from it 16.2.1 (7)
         let output =
@@ -41,11 +45,14 @@ describe("ĜAR verb", () => {
             -> setAblative(Some(ThirdSingNonHuman))
             -> setPreformative(I)
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 
     let expectedVerb = "baaĝar";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // They were placed on it 21.2 (7)
         let output =
@@ -56,11 +63,14 @@ describe("ĜAR verb", () => {
             -> setLocativeOn(None)
             -> setMiddlePrefix
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 
     let expectedVerb = "inninĝar";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // He placed it on him 18.1 (3)
         let output =
@@ -72,7 +82,9 @@ describe("ĜAR verb", () => {
             -> setObliqueObject(ThirdSingHuman)
             -> setPreformative(I)
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 });
 
@@ -83,7 +95,8 @@ describe("ĜEN verb", () => {
     let stem = "ĝen";
 
     let expectedVerb = "munšiĝen";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // He came for him 22.6 (68a)
         let output =
@@ -94,11 +107,14 @@ describe("ĜEN verb", () => {
             -> setTerminative(Some(ThirdSingHuman))
             -> setVentive
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 
     let expectedVerb = "imšiĝen";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // He came for it 22.6 (68b)
         let output =
@@ -110,11 +126,14 @@ describe("ĜEN verb", () => {
             -> setVentive
             -> setPreformative(I)
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 
     let expectedVerb = "immaĝen";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // He came to it 17.2.1 (4)
         let output =
@@ -126,7 +145,9 @@ describe("ĜEN verb", () => {
             -> setPreformative(I)
             -> setVentive
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 });
 
@@ -137,7 +158,8 @@ describe("GI verb", () => {
     let stem = "gi";
 
     let expectedVerb = "ḫamuʔšingi-gie";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // He should send him to me 16.2.5 (31)
         let output =
@@ -149,7 +171,9 @@ describe("GI verb", () => {
             -> setTerminative(Some(FirstSing))
             -> setModal
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 });
 
@@ -160,7 +184,8 @@ describe("GUB verb", () => {
     let stem = "gub";
 
     let expectedVerb = "bannēgub";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // They were caused to stand 21.2 (6)
         let output =
@@ -171,6 +196,8 @@ describe("GUB verb", () => {
             -> setIndirectObject(ThirdPlurHuman)
             -> setMiddlePrefix
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 });

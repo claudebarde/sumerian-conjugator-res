@@ -7,7 +7,8 @@ describe("UG verb", () => {
     let stem = "ʔug";
 
     let expectedVerb = "uʔuged";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // He is dying
         let output =
@@ -17,7 +18,9 @@ describe("UG verb", () => {
             -> setSubject(ThirdSingHuman)
             -> setPreformative(I)
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 })
 
@@ -28,7 +31,8 @@ describe("US verb", () => {
     let stem = "ʔus";
 
     let expectedVerb = "imminʔus";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // He had him follow them 18.2.2 (9)
         let output =
@@ -41,6 +45,8 @@ describe("US verb", () => {
             -> setPreformative(I)
             -> setVentive
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 })

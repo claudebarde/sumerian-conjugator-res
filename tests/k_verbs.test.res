@@ -7,7 +7,8 @@ describe("KAR verb", () => {
     let stem = "kar";
 
     let expectedVerb = "muʔdankar";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // He took it away from me 22.2 (12)
         let output =
@@ -19,11 +20,14 @@ describe("KAR verb", () => {
             -> setComitative(Some(FirstSing))
             -> setVentive
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 
     let expectedVerb = "bandankar";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // He took her away from him 21.2 (4)
         let output =
@@ -35,7 +39,9 @@ describe("KAR verb", () => {
             -> setComitative(Some(ThirdSingHuman))
             -> setMiddlePrefix
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 
     // BUG: inconsistent output
@@ -52,7 +58,9 @@ describe("KAR verb", () => {
     //         -> setComitative(Some(ThirdSingHuman))
     //         -> setMiddlePrefix
     //         -> print;
-    //     expect(output) -> toEqual(Ok(expected))
+    //     let _ = expect(Result.isOk(output)) -> toEqual(true);
+        // let { verb, _ } = Result.getExn(output);
+        // expect(verb) -> toEqual(expected.verb)
     // })
 });
 
@@ -63,7 +71,8 @@ describe("KUR verb", () => {
     let stem = "kuř";
 
     let expectedVerb = "baadakuř";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // He took it away from me 22.2 (12)
         let output =
@@ -74,11 +83,14 @@ describe("KUR verb", () => {
             -> setMiddlePrefix
             -> setComitative(Some(SecondSing))
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 
     let expectedVerb = "munnaninkuř";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // He let her enter it for him 17.2.2 (15)
         let output =
@@ -91,6 +103,8 @@ describe("KUR verb", () => {
             -> setVentive
             -> setLocativeIn(None)
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 });

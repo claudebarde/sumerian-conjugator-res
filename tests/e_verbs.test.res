@@ -7,7 +7,8 @@ describe("E verb", () => {
     let stem = "ʔe";
 
     let expectedVerb = "ḫēnnabʔee";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // May he say it to him! 25.4.1 (49)
         let output =
@@ -20,7 +21,9 @@ describe("E verb", () => {
             -> setPreformative(I)
             -> setModal            
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 });
 
@@ -31,7 +34,8 @@ describe("ʔÈ verb", () => {
     let stem = "ʔè";
 
     let expectedVerb = "ḫamuntaʔède";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // He must let it come out of him 16.2.2 (17)
         let output =
@@ -43,6 +47,8 @@ describe("ʔÈ verb", () => {
             -> setVentive
             -> setModal
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 });

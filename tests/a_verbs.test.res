@@ -7,8 +7,8 @@ describe("AK verb", () => {
     let stem = "ʔak";
 
     let expectedVerb = "munʔak";
-    
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         let output =
             new(stem)
@@ -18,12 +18,15 @@ describe("AK verb", () => {
             -> setObject(ThirdSingNonHuman)
             -> setVentive          
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 
     // It was made with it
     let expectedVerb = "abdaʔak";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         let output =
             new(stem)
@@ -33,13 +36,15 @@ describe("AK verb", () => {
             -> setComitative(Some(ThirdSingNonHuman))
             -> setPreformative(A)          
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 
     // He made it into it
     let expectedVerb = "ibšinʔak";
-    
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         let output =
             new(stem)
@@ -50,6 +55,8 @@ describe("AK verb", () => {
             -> setPreformative(I)      
             -> setTerminative(Some(ThirdSingNonHuman))    
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 });

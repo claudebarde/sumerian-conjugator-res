@@ -7,7 +7,8 @@ describe("DAḫ verb", () => {
     let stem = "daḫ";
 
     let expectedVerb = "aradaḫen";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // I shall add for you 17.2.4 (33)
         let output =
@@ -18,6 +19,8 @@ describe("DAḫ verb", () => {
             -> setIndirectObject(SecondSing)
             -> setPreformative(A)           
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 });

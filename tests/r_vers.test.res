@@ -7,7 +7,8 @@ describe("RIG verb", () => {
     let stem = "rig";
 
     let expectedVerb = "babrig";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // It was cleared 21.2 (1a)
         let output =
@@ -17,11 +18,14 @@ describe("RIG verb", () => {
             -> setSubject(ThirdSingNonHuman)
             -> setMiddlePrefix
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 
     let expectedVerb = "immabrig";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // It was cleared away
         let output =
@@ -33,7 +37,9 @@ describe("RIG verb", () => {
             -> setVentive
             -> setPreformative(I)
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 })
 
@@ -44,7 +50,8 @@ describe("RU verb", () => {
     let stem = "řu";
 
     let expectedVerb = "munnaninřu";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // He erected them in it for him 20.1 (1a)
         let output =
@@ -57,11 +64,14 @@ describe("RU verb", () => {
             -> setLocativeIn(None)
             -> setVentive
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 
     let expectedVerb = "binřu";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // It was cleared away
         let output =
@@ -72,6 +82,8 @@ describe("RU verb", () => {
             -> setObject(ThirdSingNonHuman)
             -> setLocativeOn(Some(ThirdSingNonHuman))
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 })

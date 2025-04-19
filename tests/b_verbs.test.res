@@ -7,7 +7,8 @@ describe("BALA verb", () => {
     let stem = "bala";
 
     let expectedVerb = "ibbalan";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
          // I cross it
         let output =
@@ -18,6 +19,8 @@ describe("BALA verb", () => {
             -> setObject(ThirdSingNonHuman)
             -> setPreformative(I)
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 });

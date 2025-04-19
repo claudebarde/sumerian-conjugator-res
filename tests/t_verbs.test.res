@@ -7,7 +7,8 @@ describe("TAG verb", () => {
     let stem = "tag";
 
     let expectedVerb = "bintag";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // He let it touch them 18.2.2 (4)
         let output =
@@ -18,7 +19,9 @@ describe("TAG verb", () => {
             -> setObject(ThirdSingNonHuman)
             -> setObliqueObject(ThirdSingNonHuman)
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 })
 
@@ -29,7 +32,8 @@ describe("TI verb", () => {
     let stem = "ti";
 
     let expectedVerb = "baašibtie";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // He will let it approach towards you 17.2.1 (6)
         let output =
@@ -41,7 +45,9 @@ describe("TI verb", () => {
             -> setTerminative(Some(SecondSing))
             -> setMiddlePrefix
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 })
 
@@ -52,7 +58,8 @@ describe("TUKU verb", () => {
     let stem = "tuku";
 
     let expectedVerb = "iʔtuku";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // I had it
         let output =
@@ -63,11 +70,14 @@ describe("TUKU verb", () => {
             -> setObject(ThirdSingNonHuman)
             -> setPreformative(I)
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 
     let expectedVerb = "ibtuktukun";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // You have me
         let output =
@@ -78,11 +88,14 @@ describe("TUKU verb", () => {
             -> setObject(ThirdSingNonHuman)
             -> setPreformative(I)
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 
     let expectedVerb = "iitukun";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // You had me
         let output =
@@ -93,11 +106,14 @@ describe("TUKU verb", () => {
             -> setObject(FirstSing)
             -> setPreformative(I)
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 
     let expectedVerb = "ibtuktukuš";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // They have it
         let output =
@@ -108,11 +124,14 @@ describe("TUKU verb", () => {
             -> setObject(ThirdSingNonHuman)
             -> setPreformative(I)
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 
     let expectedVerb = "numuʔdaatuku";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // You do not have it with me 16.2.5 (30)
         let output =
@@ -124,11 +143,14 @@ describe("TUKU verb", () => {
             -> setComitative(Some(FirstSing))
             -> setNegative
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 
     let expectedVerb = "mēdantuku";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // He has it with us 16.2.6 (34)
         let output =
@@ -139,6 +161,8 @@ describe("TUKU verb", () => {
             -> setObject(ThirdSingNonHuman)
             -> setComitative(Some(FirstPlur))
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 })

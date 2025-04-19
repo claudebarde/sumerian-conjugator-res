@@ -7,7 +7,8 @@ describe("PAD verb", () => {
     let stem = "pad";
 
     let expectedVerb = "binpad";
-    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
         // He let him find it 18.1 (2)
         let output =
@@ -18,6 +19,8 @@ describe("PAD verb", () => {
             -> setObject(ThirdSingNonHuman)
             -> setObliqueObject(ThirdSingNonHuman)
             -> print;
-        expect(output) -> toEqual(Ok(expected))
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
     })
 })
