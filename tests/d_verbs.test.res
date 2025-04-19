@@ -6,8 +6,9 @@ describe("DAḫ verb", () => {
 
     let stem = "daḫ";
 
-    let expected = "aradaḫen";
-    test(expected, () => {
+    let expectedVerb = "aradaḫen";
+    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    test(expectedVerb, () => {
         // I shall add for you 17.2.4 (33)
         let output =
             new(stem)

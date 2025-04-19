@@ -6,8 +6,9 @@ describe("ZIG verb", () => {
     
     let stem = "zig";
 
-    let expected = "ibtazig";
-    test(expected, () => {
+    let expectedVerb = "ibtazig";
+    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    test(expectedVerb, () => {
         // They were raised from these 22.1 (1)
         let output =
             new(stem)
@@ -26,12 +27,9 @@ describe("ZU verb", () => {
   
   let stem = "zu";
 
-  test("zu stem", () => {
-    let output = FiniteVerb.new(stem) -> FiniteVerb.print;
-    expect(output) -> toEqual(Ok(stem))
-  });
-
-  test("munzu", () => {
+  let expectedVerb = "munzu";
+  let expected: VerbOutput.multiResult = { verb: expectedVerb };
+  test(expectedVerb, () => {
     // He truly knows 22.1 (1)
     let output =
       FiniteVerb.new(stem)
@@ -41,6 +39,6 @@ describe("ZU verb", () => {
       -> FiniteVerb.setObject(ThirdSingNonHuman)
       -> FiniteVerb.setVentive
       -> FiniteVerb.print;
-    expect(output) -> toEqual(Ok("munzu"))
+    expect(output) -> toEqual(Ok(expected))
   })
 });

@@ -6,8 +6,10 @@ describe("AK verb", () => {
 
     let stem = "ʔak";
 
-    let expected = "munʔak";
-    test(expected, () => {
+    let expectedVerb = "munʔak";
+    
+    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    test(expectedVerb, () => {
         let output =
             new(stem)
             -> isPerfective
@@ -20,8 +22,9 @@ describe("AK verb", () => {
     })
 
     // It was made with it
-    let expected = "abdaʔak";
-    test(expected, () => {
+    let expectedVerb = "abdaʔak";
+    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    test(expectedVerb, () => {
         let output =
             new(stem)
             -> isPerfective
@@ -34,8 +37,10 @@ describe("AK verb", () => {
     })
 
     // He made it into it
-    let expected = "ibšinʔak";
-    test(expected, () => {
+    let expectedVerb = "ibšinʔak";
+    
+    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    test(expectedVerb, () => {
         let output =
             new(stem)
             -> isPerfective

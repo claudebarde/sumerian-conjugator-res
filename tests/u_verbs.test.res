@@ -6,8 +6,9 @@ describe("UG verb", () => {
 
     let stem = "ʔug";
 
-    let expected = "uʔuged";
-    test(expected, () => {
+    let expectedVerb = "uʔuged";
+    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    test(expectedVerb, () => {
         // He is dying
         let output =
             new(stem)
@@ -26,8 +27,9 @@ describe("US verb", () => {
 
     let stem = "ʔus";
 
-    let expected = "imminʔus";
-    test(expected, () => {
+    let expectedVerb = "imminʔus";
+    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    test(expectedVerb, () => {
         // He had him follow them 18.2.2 (9)
         let output =
             new(stem)

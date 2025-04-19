@@ -6,8 +6,9 @@ describe("TAG verb", () => {
 
     let stem = "tag";
 
-    let expected = "bintag";
-    test(expected, () => {
+    let expectedVerb = "bintag";
+    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    test(expectedVerb, () => {
         // He let it touch them 18.2.2 (4)
         let output =
             new(stem)
@@ -27,8 +28,9 @@ describe("TI verb", () => {
 
     let stem = "ti";
 
-    let expected = "baašibtie";
-    test(expected, () => {
+    let expectedVerb = "baašibtie";
+    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    test(expectedVerb, () => {
         // He will let it approach towards you 17.2.1 (6)
         let output =
             new(stem)
@@ -49,8 +51,9 @@ describe("TUKU verb", () => {
 
     let stem = "tuku";
 
-    let expected = "iʔtuku";
-    test(expected, () => {
+    let expectedVerb = "iʔtuku";
+    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    test(expectedVerb, () => {
         // I had it
         let output =
             new(stem)
@@ -63,8 +66,9 @@ describe("TUKU verb", () => {
         expect(output) -> toEqual(Ok(expected))
     })
 
-    let expected = "ibtuktukun";
-    test(expected, () => {
+    let expectedVerb = "ibtuktukun";
+    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    test(expectedVerb, () => {
         // You have me
         let output =
             new(stem)
@@ -77,8 +81,9 @@ describe("TUKU verb", () => {
         expect(output) -> toEqual(Ok(expected))
     })
 
-    let expected = "iitukun";
-    test(expected, () => {
+    let expectedVerb = "iitukun";
+    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    test(expectedVerb, () => {
         // You had me
         let output =
             new(stem)
@@ -91,8 +96,9 @@ describe("TUKU verb", () => {
         expect(output) -> toEqual(Ok(expected))
     })
 
-    let expected = "ibtuktukuš";
-    test(expected, () => {
+    let expectedVerb = "ibtuktukuš";
+    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    test(expectedVerb, () => {
         // They have it
         let output =
             new(stem)
@@ -105,8 +111,9 @@ describe("TUKU verb", () => {
         expect(output) -> toEqual(Ok(expected))
     })
 
-    let expected = "numuʔdaatuku";
-    test(expected, () => {
+    let expectedVerb = "numuʔdaatuku";
+    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    test(expectedVerb, () => {
         // You do not have it with me 16.2.5 (30)
         let output =
             new(stem)
@@ -120,8 +127,9 @@ describe("TUKU verb", () => {
         expect(output) -> toEqual(Ok(expected))
     })
 
-    let expected = "mēdantuku";
-    test(expected, () => {
+    let expectedVerb = "mēdantuku";
+    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    test(expectedVerb, () => {
         // He has it with us 16.2.6 (34)
         let output =
             new(stem)

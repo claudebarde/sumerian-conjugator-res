@@ -6,8 +6,9 @@ describe("E verb", () => {
 
     let stem = "ʔe";
 
-    let expected = "ḫēnnabʔee";
-    test(expected, () => {
+    let expectedVerb = "ḫēnnabʔee";
+    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    test(expectedVerb, () => {
         // May he say it to him! 25.4.1 (49)
         let output =
             new(stem)
@@ -29,8 +30,9 @@ describe("ʔÈ verb", () => {
 
     let stem = "ʔè";
 
-    let expected = "ḫamuntaʔède";
-    test(expected, () => {
+    let expectedVerb = "ḫamuntaʔède";
+    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    test(expectedVerb, () => {
         // He must let it come out of him 16.2.2 (17)
         let output =
             new(stem)

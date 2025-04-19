@@ -6,8 +6,9 @@ describe("RIG verb", () => {
 
     let stem = "rig";
 
-    let expected = "babrig";
-    test(expected, () => {
+    let expectedVerb = "babrig";
+    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    test(expectedVerb, () => {
         // It was cleared 21.2 (1a)
         let output =
             new(stem)
@@ -19,8 +20,9 @@ describe("RIG verb", () => {
         expect(output) -> toEqual(Ok(expected))
     })
 
-    let expected = "immabrig";
-    test(expected, () => {
+    let expectedVerb = "immabrig";
+    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    test(expectedVerb, () => {
         // It was cleared away
         let output =
             new(stem)
@@ -41,8 +43,9 @@ describe("RU verb", () => {
 
     let stem = "řu";
 
-    let expected = "munnaninřu";
-    test(expected, () => {
+    let expectedVerb = "munnaninřu";
+    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    test(expectedVerb, () => {
         // He erected them in it for him 20.1 (1a)
         let output =
             new(stem)
@@ -57,8 +60,9 @@ describe("RU verb", () => {
         expect(output) -> toEqual(Ok(expected))
     })
 
-    let expected = "binřu";
-    test(expected, () => {
+    let expectedVerb = "binřu";
+    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    test(expectedVerb, () => {
         // It was cleared away
         let output =
             new(stem)

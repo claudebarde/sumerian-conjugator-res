@@ -6,8 +6,9 @@ describe("PAD verb", () => {
 
     let stem = "pad";
 
-    let expected = "binpad";
-    test(expected, () => {
+    let expectedVerb = "binpad";
+    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    test(expectedVerb, () => {
         // He let him find it 18.1 (2)
         let output =
             new(stem)

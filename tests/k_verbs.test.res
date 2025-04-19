@@ -6,8 +6,9 @@ describe("KAR verb", () => {
 
     let stem = "kar";
 
-    let expected = "muʔdankar";
-    test(expected, () => {
+    let expectedVerb = "muʔdankar";
+    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    test(expectedVerb, () => {
         // He took it away from me 22.2 (12)
         let output =
             new(stem)
@@ -21,8 +22,9 @@ describe("KAR verb", () => {
         expect(output) -> toEqual(Ok(expected))
     })
 
-    let expected = "bandankar";
-    test(expected, () => {
+    let expectedVerb = "bandankar";
+    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    test(expectedVerb, () => {
         // He took her away from him 21.2 (4)
         let output =
             new(stem)
@@ -37,8 +39,9 @@ describe("KAR verb", () => {
     })
 
     // BUG: inconsistent output
-    // let expected = "baʔdankar";
-    // test(expected, () => {
+    // let expectedVerb = "baʔdankar";
+    // let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    // test(expectedVerb, () => {
     //     // He took her away from me
     //     let output =
     //         new(stem)
@@ -59,8 +62,9 @@ describe("KUR verb", () => {
 
     let stem = "kuř";
 
-    let expected = "baadakuř";
-    test(expected, () => {
+    let expectedVerb = "baadakuř";
+    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    test(expectedVerb, () => {
         // He took it away from me 22.2 (12)
         let output =
             new(stem)
@@ -73,8 +77,9 @@ describe("KUR verb", () => {
         expect(output) -> toEqual(Ok(expected))
     })
 
-    let expected = "munnaninkuř";
-    test(expected, () => {
+    let expectedVerb = "munnaninkuř";
+    let expected: VerbOutput.multiResult = { verb: expectedVerb };
+    test(expectedVerb, () => {
         // He let her enter it for him 17.2.2 (15)
         let output =
             new(stem)
