@@ -23,6 +23,25 @@ describe("ZIG verb", () => {
         let { verb, _ } = Result.getExn(output);
         expect(verb) -> toEqual(expected.verb)
     })
+
+    let expectedVerb = "nuubtazig";
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    test(expectedVerb, () => {
+        // It was not raised from it 25.2 (5)
+        let output =
+            new(stem)
+            -> isPerfective
+            -> isIntransitive
+            -> setSubject(ThirdSingNonHuman)
+            -> setAblative(Some(ThirdSingNonHuman))
+            -> setNegative
+            -> setPreformative(I)
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
 });
 
 describe("ZU verb", () => {

@@ -23,6 +23,25 @@ describe("ĜAL verb", () => {
         let { verb, _ } = Result.getExn(output);
         expect(verb) -> toEqual(expected.verb)
     })
+
+    let expectedVerb = "numunĝal";
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    test(expectedVerb, () => {
+        // It is not there in it 25.2 (11)
+        let output =
+            new(stem)
+            -> isPerfective
+            -> isIntransitive
+            -> setSubject(ThirdSingNonHuman)
+            -> setLocativeIn(None)
+            -> setNegative
+            -> setVentive
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
 });
 
 describe("ĜAR verb", () => {
@@ -81,6 +100,32 @@ describe("ĜAR verb", () => {
             -> setObject(ThirdSingNonHuman)
             -> setObliqueObject(ThirdSingHuman)
             -> setPreformative(I)
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
+});
+
+describe("GEN verb", () => {
+    open Expect;
+    open FiniteVerb;
+
+    let stem = "gen";
+
+    let expectedVerb = "ḫabibgene";
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    test(expectedVerb, () => {
+        // He should be firm on it 25.4.1 (52)
+        let output =
+            new(stem)
+            -> isImperfective(None)
+            -> isTransitive
+            -> setSubject(ThirdSingHuman)
+            -> setObject(ThirdSingNonHuman)
+            -> setModal
+            -> setLocativeOn(Some(ThirdSingNonHuman))
             -> print;
         let _ = expect(Result.isOk(output)) -> toEqual(true);
         let { verb, _ } = Result.getExn(output);
@@ -149,6 +194,25 @@ describe("ĜEN verb", () => {
         let { verb, _ } = Result.getExn(output);
         expect(verb) -> toEqual(expected.verb)
     })
+
+    let expectedVerb = "nuumĝen";
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    test(expectedVerb, () => {
+        // He doesn't come 22.5 (8)
+        let output =
+            new(stem)
+            -> isPerfective
+            -> isIntransitive
+            -> setSubject(ThirdSingHuman)
+            -> setNegative
+            -> setVentive
+            -> setPreformative(I)
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
 });
 
 describe("GI verb", () => {
@@ -170,6 +234,25 @@ describe("GI verb", () => {
             -> setObject(ThirdSingHuman)
             -> setTerminative(Some(FirstSing))
             -> setModal
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
+
+    let expectedVerb = "nuubgi-gideš";
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    test(expectedVerb, () => {
+        // They will not come back on this 25.2 (9)
+        let output =
+            new(stem)
+            -> isImperfective(Some(Other("gi-gid")))
+            -> isIntransitive
+            -> setSubject(ThirdPlurHuman)
+            -> setLocativeOn(Some(ThirdSingNonHuman))
+            -> setNegative
+            -> setPreformative(I)
             -> print;
         let _ = expect(Result.isOk(output)) -> toEqual(true);
         let { verb, _ } = Result.getExn(output);

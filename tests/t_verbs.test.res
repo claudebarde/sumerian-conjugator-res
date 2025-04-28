@@ -49,6 +49,25 @@ describe("TI verb", () => {
         let { verb, _ } = Result.getExn(output);
         expect(verb) -> toEqual(expected.verb)
     })
+
+    let expectedVerb = "labanti";
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    test(expectedVerb, () => {
+        // He did not receive it 22.5 (20)
+        let output =
+            new(stem)
+            -> isPerfective
+            -> isTransitive
+            -> setSubject(ThirdSingHuman)
+            -> setObject(ThirdSingNonHuman)
+            -> setIndirectObject(ThirdSingNonHuman)
+            -> setNegative
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
 })
 
 describe("TUKU verb", () => {
@@ -160,6 +179,33 @@ describe("TUKU verb", () => {
             -> setSubject(ThirdSingHuman)
             -> setObject(ThirdSingNonHuman)
             -> setComitative(Some(FirstPlur))
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
+})
+
+describe("TUM", () => {
+    open Expect;
+    open FiniteVerb;
+
+    let stem = "tum";
+
+    let expectedVerb = "numundantum";
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    test(expectedVerb, () => {
+        // He was not able to bring it 25.2 (12)
+        let output =
+            new(stem)
+            -> isPerfective
+            -> isTransitive
+            -> setSubject(ThirdSingHuman)
+            -> setObject(ThirdSingNonHuman)
+            -> setNegative
+            -> setVentive
+            -> setComitative(Some(ThirdSingHuman))
             -> print;
         let _ = expect(Result.isOk(output)) -> toEqual(true);
         let { verb, _ } = Result.getExn(output);

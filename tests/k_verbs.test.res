@@ -44,6 +44,26 @@ describe("KAR verb", () => {
         expect(verb) -> toEqual(expected.verb)
     })
 
+    let expectedVerb = "labadabkare";
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    test(expectedVerb, () => {
+        // He takes it away from it 22.2 (12)
+        let output =
+            new(stem)
+            -> isImperfective(None)
+            -> isTransitive
+            -> setSubject(ThirdSingHuman)
+            -> setObject(ThirdSingNonHuman)
+            -> setComitative(None)
+            -> setMiddlePrefix
+            -> setNegative
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
+
     // BUG: inconsistent output
     // let expectedVerb = "baʔdankar";
     // let expected: VerbOutput.multiResult = { verb: expectedVerb };
@@ -101,6 +121,25 @@ describe("KUR verb", () => {
             -> setObject(ThirdSingNonHuman)
             -> setIndirectObject(ThirdSingHuman)
             -> setVentive
+            -> setLocativeIn(None)
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
+
+    let expectedVerb = "labankuř";
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    test(expectedVerb, () => {
+        // It was not brought into it 25.2 (23)
+        let output =
+            new(stem)
+            -> isPerfective
+            -> isIntransitive
+            -> setSubject(ThirdSingNonHuman)
+            -> setMiddlePrefix
+            -> setNegative
             -> setLocativeIn(None)
             -> print;
         let _ = expect(Result.isOk(output)) -> toEqual(true);

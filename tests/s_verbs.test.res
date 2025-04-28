@@ -52,6 +52,53 @@ describe("SA verb", () => {
     })
 })
 
+describe("SA verb", () => {
+    open Expect;
+    open FiniteVerb;
+
+    let stem = "sa";
+
+    let expectedVerb = "labatansa";
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    test(expectedVerb, () => {
+        // He had not sold her 25.2 (15)
+        let output =
+            new(stem)
+            -> isPerfective
+            -> isTransitive
+            -> setSubject(ThirdSingHuman)
+            -> setObject(ThirdSingHuman)
+            -> setMiddlePrefix
+            -> setNegative
+            -> setAblative(None)
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
+
+    let expectedVerb = "labataʔsa";
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    test(expectedVerb, () => {
+        // I did not sell her 25.2 (22)
+        let output =
+            new(stem)
+            -> isPerfective
+            -> isTransitive
+            -> setSubject(FirstSing)
+            -> setObject(ThirdSingHuman)
+            -> setMiddlePrefix
+            -> setAblative(None)
+            -> setNegative
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb) 
+    })
+})
+
 describe("SIG-SIG verb", () => {
     open Expect;
     open FiniteVerb;
@@ -239,7 +286,7 @@ describe("SUM verb", () => {
         expect(verb) -> toEqual(expected.verb)
     })
 
-    let expectedVerb = "nuraʔšum";
+    let expectedVerb = "nuuraʔšum"; // BUG: decide about 17.2.4 (38) and "nu-ra"
     let expectedAnalysis = VerbAnalysis.new();
     let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
     test(expectedVerb, () => {
@@ -252,6 +299,45 @@ describe("SUM verb", () => {
             -> setObject(ThirdSingHuman)
             -> setIndirectObject(SecondSing)
             -> setNegative
+            -> setPreformative(I)
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
+
+    let expectedVerb = "ḫamēšume"; 
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    test(expectedVerb, () => {
+        // He should give it to us 25.4.1 (51)
+        let output =
+            new(stem)
+            -> isImperfective(None)
+            -> isTransitive
+            -> setSubject(ThirdSingHuman)
+            -> setIndirectObject(FirstPlur)
+            -> setModal
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
+
+    let expectedVerb = "ḫamunnabšume"; 
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    test(expectedVerb, () => {
+        // He should give it to him 25.4.1 (56)
+        let output =
+            new(stem)
+            -> isImperfective(None)
+            -> isTransitive
+            -> setSubject(ThirdSingHuman)
+            -> setIndirectObject(ThirdSingHuman)
+            -> setObject(ThirdSingNonHuman)
+            -> setVentive
+            -> setModal
             -> print;
         let _ = expect(Result.isOk(output)) -> toEqual(true);
         let { verb, _ } = Result.getExn(output);
