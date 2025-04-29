@@ -105,6 +105,46 @@ describe("ĜAR verb", () => {
         let { verb, _ } = Result.getExn(output);
         expect(verb) -> toEqual(expected.verb)
     })
+
+    let expectedVerb = "ḫamunnaaĝar-ĝare";
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    test(expectedVerb, () => {
+        // He should place it on it for him 25.4.2 (63)
+        let output =
+            new(stem)
+            -> isImperfective(Some(Reduplicate))
+            -> isTransitive
+            -> setSubject(ThirdSingHuman)
+            -> setVentive
+            -> setModal
+            -> setLocativeOn(None)
+            -> setIndirectObject(ThirdSingHuman)
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
+
+    let expectedVerb = "ḫēmtaĝar";
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    test(expectedVerb, () => {
+        // May it be removed from it 25.4.2 (65)
+        let output =
+            new(stem)
+            -> isPerfective
+            -> isIntransitive
+            -> setSubject(ThirdSingHuman)
+            -> setVentive
+            -> setModal
+            -> setPreformative(I)
+            -> setAblative(None)
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
 });
 
 describe("GEN verb", () => {
@@ -258,6 +298,25 @@ describe("GI verb", () => {
         let { verb, _ } = Result.getExn(output);
         expect(verb) -> toEqual(expected.verb)
     })
+
+    let expectedVerb = "ḫēbgi";
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    test(expectedVerb, () => {
+        // May it be reversed on it 25.4.1 (66)
+        let output =
+            new(stem)
+            -> isPerfective
+            -> isIntransitive
+            -> setSubject(ThirdSingNonHuman)
+            -> setModal
+            -> setLocativeOn(Some(ThirdSingNonHuman))
+            -> setPreformative(I)
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
 });
 
 describe("GUB verb", () => {
@@ -278,6 +337,33 @@ describe("GUB verb", () => {
             -> setSubject(ThirdPlurNonHuman)
             -> setIndirectObject(ThirdPlurHuman)
             -> setMiddlePrefix
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
+});
+
+describe("GUR verb", () => {
+    open Expect;
+    open FiniteVerb;
+
+    let stem = "gur";
+
+    let expectedVerb = "nammibgure";
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    test(expectedVerb, () => {
+        // He should not refuse this (91)
+        let output =
+            new(stem)
+            -> isImperfective(None)
+            -> isTransitive
+            -> setSubject(ThirdSingHuman)
+            -> setObject(ThirdSingNonHuman)
+            -> setLocativeOn(Some(ThirdSingNonHuman))
+            -> setVentive
+            -> setNegativeNan
             -> print;
         let _ = expect(Result.isOk(output)) -> toEqual(true);
         let { verb, _ } = Result.getExn(output);

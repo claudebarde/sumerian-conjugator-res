@@ -85,6 +85,10 @@ let resetModal = (verb: t): t => {
     {...verb, firstPrefix: None}
 }
 
+let setNegativeNan = (verb: t): t => {
+    {...verb, firstPrefix: Some(FirstPrefix.NegativeNan)}
+}
+
 let setPreformative = (verb: t, preformative: preformative): t => {
     {...verb, preformative: Some(preformative)}
 }

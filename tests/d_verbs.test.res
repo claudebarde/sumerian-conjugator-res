@@ -1,5 +1,30 @@
 open Jest;
 
+describe("DAB verb", () => {
+    open Expect;
+    open FiniteVerb;
+
+    let stem = "dab";
+
+    let expectedVerb = "nabdabe";
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    test(expectedVerb, () => {
+        // (nobody) should seize it 25.5 (87)
+        let output =
+            new(stem)
+            -> isImperfective(None)
+            -> isTransitive
+            -> setSubject(ThirdSingHuman)
+            -> setObject(ThirdSingNonHuman)
+            -> setNegativeNan     
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
+});
+
 describe("DAḫ verb", () => {
     open Expect;
     open FiniteVerb;

@@ -146,4 +146,23 @@ describe("KUR verb", () => {
         let { verb, _ } = Result.getExn(output);
         expect(verb) -> toEqual(expected.verb)
     })
+
+    let expectedVerb = "ḫēbtakuře";
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    test(expectedVerb, () => {
+        // Should he break it 22.4.2 (80)
+        let output =
+            new(stem)
+            -> isImperfective(None)
+            -> isTransitive
+            -> setSubject(ThirdSingHuman)
+            -> setAblative(Some(ThirdSingNonHuman))
+            -> setModal
+            -> setPreformative(I)
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
 });

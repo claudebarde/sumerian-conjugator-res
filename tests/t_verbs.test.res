@@ -25,6 +25,32 @@ describe("TAG verb", () => {
     })
 })
 
+describe("TEĜ verb", () => {
+    open Expect;
+    open FiniteVerb;
+
+    let stem = "teĝ";
+
+    let expectedVerb = "nambabteĝe";
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    test(expectedVerb, () => {
+        // He should not approach it 25.5 (92)
+        let output =
+            new(stem)
+            -> isImperfective(None)
+            -> isTransitive
+            -> setSubject(ThirdSingHuman)
+            -> setObject(ThirdSingNonHuman)
+            -> setIndirectObject(ThirdSingNonHuman)
+            -> setNegativeNan
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
+})
+
 describe("TI verb", () => {
     open Expect;
     open FiniteVerb;
@@ -184,6 +210,25 @@ describe("TUKU verb", () => {
         let { verb, _ } = Result.getExn(output);
         expect(verb) -> toEqual(expected.verb)
     })
+
+    let expectedVerb = "ḫaaʔtuku";
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    test(expectedVerb, () => {
+        // I wish to have her 25.4.2 (69)
+        let output =
+            new(stem)
+            -> isPerfective
+            -> isTransitive
+            -> setSubject(FirstSing)
+            -> setObject(ThirdSingHuman)
+            -> setPreformative(A)
+            -> setModal
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
 })
 
 describe("TUM", () => {
@@ -206,6 +251,52 @@ describe("TUM", () => {
             -> setNegative
             -> setVentive
             -> setComitative(Some(ThirdSingHuman))
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
+
+    let expectedVerb = "ḫamuutum";
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    test(expectedVerb, () => {
+        // You should bring it 25.4.2 (12)
+        let output =
+            new(stem)
+            -> isPerfective
+            -> isTransitive
+            -> setSubject(SecondSing)
+            -> setObject(ThirdSingNonHuman)
+            -> setModal
+            -> setVentive
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
+})
+
+describe("TUŠ", () => {
+    open Expect;
+    open FiniteVerb;
+
+    let stem = "tuš";
+
+    let expectedVerb = "ḫamuʔdantuš";
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    test(expectedVerb, () => {
+        // She truly sat with me in it 25.4.2 (75)
+        let output =
+            new(stem)
+            -> isPerfective
+            -> isIntransitive
+            -> setSubject(ThirdSingHuman)
+            -> setModal
+            -> setVentive
+            -> setComitative(Some(FirstSing))
+            -> setLocativeIn(None)
             -> print;
         let _ = expect(Result.isOk(output)) -> toEqual(true);
         let { verb, _ } = Result.getExn(output);

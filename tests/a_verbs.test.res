@@ -59,6 +59,27 @@ describe("AK verb", () => {
         let { verb, _ } = Result.getExn(output);
         expect(verb) -> toEqual(expected.verb)
     })
+
+    let expectedVerb = "ḫēmminʔak";
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    test(expectedVerb, () => {
+        // He truly let him make it
+        let output =
+            new(stem)
+            -> isPerfective
+            -> isTransitive
+            -> setSubject(ThirdSingHuman)
+            -> setObject(ThirdSingNonHuman)
+            -> setObliqueObject(ThirdSingNonHuman)
+            -> setPreformative(I)
+            -> setVentive
+            -> setModal
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
 });
 
 describe("AĜ verb", () => {
