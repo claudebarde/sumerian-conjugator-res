@@ -13,6 +13,7 @@ module FirstPrefix = {
     | Modal
     | Negative
     | NegativeNan
+    | ModalGa
 }
 
 type preformative =

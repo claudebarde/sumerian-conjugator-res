@@ -8,7 +8,7 @@ describe("UG verb", () => {
 
     let expectedVerb = "uʔuged";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He is dying
         let output =
@@ -32,7 +32,7 @@ describe("US verb", () => {
 
     let expectedVerb = "imminʔus";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He had him follow them 18.2.2 (9)
         let output =
@@ -52,7 +52,7 @@ describe("US verb", () => {
 
     let expectedVerb = "namanʔus";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // 25.2 (14)
         let output =

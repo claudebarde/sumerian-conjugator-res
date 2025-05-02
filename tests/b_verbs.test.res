@@ -8,7 +8,7 @@ describe("BA verb", () => {
 
     let expectedVerb = "namanba";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
          // He did not assign it to me 25.2 (13)
         let output =
@@ -34,7 +34,7 @@ describe("BALA verb", () => {
 
     let expectedVerb = "ibbalan";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
          // I cross it
         let output =
@@ -59,7 +59,7 @@ describe("BAR verb", () => {
 
     let expectedVerb = "ḫēbbare";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
          // He should open it on it
         let output =

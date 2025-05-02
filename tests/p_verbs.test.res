@@ -8,7 +8,7 @@ describe("PAD verb", () => {
 
     let expectedVerb = "binpad";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He let him find it 18.1 (2)
         let output =

@@ -8,7 +8,7 @@ describe("KAR verb", () => {
 
     let expectedVerb = "muʔdankar";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He took it away from me 22.2 (12)
         let output =
@@ -27,7 +27,7 @@ describe("KAR verb", () => {
 
     let expectedVerb = "bandankar";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He took her away from him 21.2 (4)
         let output =
@@ -46,7 +46,7 @@ describe("KAR verb", () => {
 
     let expectedVerb = "labadabkare";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He takes it away from it 22.2 (12)
         let output =
@@ -92,7 +92,7 @@ describe("KUR verb", () => {
 
     let expectedVerb = "baadakuř";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He took it away from me 22.2 (12)
         let output =
@@ -110,7 +110,7 @@ describe("KUR verb", () => {
 
     let expectedVerb = "munnaninkuř";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He let her enter it for him 17.2.2 (15)
         let output =
@@ -130,7 +130,7 @@ describe("KUR verb", () => {
 
     let expectedVerb = "labankuř";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // It was not brought into it 25.2 (23)
         let output =
@@ -149,7 +149,7 @@ describe("KUR verb", () => {
 
     let expectedVerb = "ḫēbtakuře";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // Should he break it 22.4.2 (80)
         let output =

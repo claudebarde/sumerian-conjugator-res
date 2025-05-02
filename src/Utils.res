@@ -39,6 +39,26 @@ let fromPersonToFPP = (person: personParam): finalPersonPrefix => {
     }
 }
 
+let fromFPStoFPP = (suffix: finalPersonSuffix): finalPersonPrefix => {
+    switch suffix {
+        | FirstSing => FirstSing
+        | SecondSing => SecondSing
+        | ThirdSingHuman => ThirdSingHuman
+        | ThirdSingNonHuman => ThirdSingNonHuman
+        | _ => %todo("TODO: handle plural subjects in fromFPStoFPP")
+    }
+}
+
+let fromIPPtoFPP = (prefix: initialPersonPrefix): finalPersonPrefix => {
+    switch prefix {
+        | FirstSing => FirstSing
+        | SecondSing => SecondSing
+        | ThirdSingHuman => ThirdSingHuman
+        | ThirdSingNonHuman => ThirdSingNonHuman
+        | _ => %todo("TODO: handle plural subjects in fromIPPtoFPP")
+    }
+}
+
 type markerName = 
     | FirstPrefix
     | Preformative

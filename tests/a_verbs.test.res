@@ -8,7 +8,7 @@ describe("AK verb", () => {
 
     let expectedVerb = "munʔak";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         let output =
             new(stem)
@@ -26,7 +26,7 @@ describe("AK verb", () => {
     // It was made with it
     let expectedVerb = "abdaʔak";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         let output =
             new(stem)
@@ -44,7 +44,7 @@ describe("AK verb", () => {
     // He made it into it
     let expectedVerb = "ibšinʔak";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         let output =
             new(stem)
@@ -62,7 +62,7 @@ describe("AK verb", () => {
 
     let expectedVerb = "ḫēmminʔak";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He truly let him make it
         let output =
@@ -90,7 +90,7 @@ describe("AĜ verb", () => {
 
     let expectedVerb = "nuannaʔaĝe";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He will not pay to him 25.2 (10)
         let output =

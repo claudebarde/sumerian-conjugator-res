@@ -8,7 +8,7 @@ describe("LÁ verb", () => {
 
     let expectedVerb = "annalá";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // It was weighed out for him 17.2.2 (8)
         let output =

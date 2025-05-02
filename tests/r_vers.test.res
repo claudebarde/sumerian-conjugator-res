@@ -8,7 +8,7 @@ describe("RIG verb", () => {
 
     let expectedVerb = "babrig";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // It was cleared 21.2 (1a)
         let output =
@@ -25,7 +25,7 @@ describe("RIG verb", () => {
 
     let expectedVerb = "immabrig";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // It was cleared away
         let output =
@@ -51,7 +51,7 @@ describe("RU verb", () => {
 
     let expectedVerb = "munnaninřu";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He erected them in it for him 20.1 (1a)
         let output =
@@ -71,7 +71,7 @@ describe("RU verb", () => {
 
     let expectedVerb = "binřu";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // It was cleared away
         let output =
@@ -81,6 +81,25 @@ describe("RU verb", () => {
             -> setSubject(ThirdSingHuman)
             -> setObject(ThirdSingNonHuman)
             -> setLocativeOn(Some(ThirdSingNonHuman))
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
+
+    let expectedVerb = "gamarařu";
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
+    test(expectedVerb, () => {
+        // I will build it for you 25.6 (109)
+        let output =
+            new(stem)
+            -> isPerfective
+            -> isTransitive
+            -> setSubject(FirstSing)
+            -> setIndirectObject(SecondSing)
+            -> setModalGa
+            -> setVentive
             -> print;
         let _ = expect(Result.isOk(output)) -> toEqual(true);
         let { verb, _ } = Result.getExn(output);

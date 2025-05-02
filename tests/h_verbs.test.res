@@ -8,7 +8,7 @@ describe("HUL verb", () => {
 
     let expectedVerb = "imdahul";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He was happy about it 22.6 (67b)
         let output =

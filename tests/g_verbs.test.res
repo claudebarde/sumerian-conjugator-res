@@ -8,7 +8,7 @@ describe("ĜAL verb", () => {
 
     let expectedVerb = "indaĝal";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // This is with him 16.2.2 (14a)
         let output =
@@ -26,7 +26,7 @@ describe("ĜAL verb", () => {
 
     let expectedVerb = "numunĝal";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // It is not there in it 25.2 (11)
         let output =
@@ -52,7 +52,7 @@ describe("ĜAR verb", () => {
 
     let expectedVerb = "ibtanĝar";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He placed it from it 16.2.1 (7)
         let output =
@@ -71,7 +71,7 @@ describe("ĜAR verb", () => {
 
     let expectedVerb = "baaĝar";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // They were placed on it 21.2 (7)
         let output =
@@ -89,7 +89,7 @@ describe("ĜAR verb", () => {
 
     let expectedVerb = "inninĝar";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He placed it on him 18.1 (3)
         let output =
@@ -108,7 +108,7 @@ describe("ĜAR verb", () => {
 
     let expectedVerb = "ḫamunnaaĝar-ĝare";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He should place it on it for him 25.4.2 (63)
         let output =
@@ -128,7 +128,7 @@ describe("ĜAR verb", () => {
 
     let expectedVerb = "ḫēmtaĝar";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // May it be removed from it 25.4.2 (65)
         let output =
@@ -145,6 +145,24 @@ describe("ĜAR verb", () => {
         let { verb, _ } = Result.getExn(output);
         expect(verb) -> toEqual(expected.verb)
     })
+
+    let expectedVerb = "garaaĝar"
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
+    test(expectedVerb, () => {
+        // I will put it on it for you 25.6 (114)
+        let output =
+            new(stem)
+            -> isPerfective
+            -> isTransitive
+            -> setLocativeOn(None)
+            -> setIndirectObject(SecondSing)
+            -> setModalGa
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
 });
 
 describe("GEN verb", () => {
@@ -155,7 +173,7 @@ describe("GEN verb", () => {
 
     let expectedVerb = "ḫabibgene";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He should be firm on it 25.4.1 (52)
         let output =
@@ -181,7 +199,7 @@ describe("ĜEN verb", () => {
 
     let expectedVerb = "munšiĝen";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He came for him 22.6 (68a)
         let output =
@@ -199,7 +217,7 @@ describe("ĜEN verb", () => {
 
     let expectedVerb = "imšiĝen";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He came for it 22.6 (68b)
         let output =
@@ -218,7 +236,7 @@ describe("ĜEN verb", () => {
 
     let expectedVerb = "immaĝen";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He came to it 17.2.1 (4)
         let output =
@@ -237,7 +255,7 @@ describe("ĜEN verb", () => {
 
     let expectedVerb = "nuumĝen";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He doesn't come 22.5 (8)
         let output =
@@ -263,7 +281,7 @@ describe("GI verb", () => {
 
     let expectedVerb = "ḫamuʔšingi-gie";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He should send him to me 16.2.5 (31)
         let output =
@@ -282,7 +300,7 @@ describe("GI verb", () => {
 
     let expectedVerb = "nuubgi-gideš";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // They will not come back on this 25.2 (9)
         let output =
@@ -301,9 +319,9 @@ describe("GI verb", () => {
 
     let expectedVerb = "ḫēbgi";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
-        // May it be reversed on it 25.4.1 (66)
+        // May it be reversed on it 25.4.2 (66)
         let output =
             new(stem)
             -> isPerfective
@@ -327,7 +345,7 @@ describe("GUB verb", () => {
 
     let expectedVerb = "bannēgub";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // They were caused to stand 21.2 (6)
         let output =
@@ -352,7 +370,7 @@ describe("GUR verb", () => {
 
     let expectedVerb = "nammibgure";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He should not refuse this (91)
         let output =

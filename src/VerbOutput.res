@@ -5,6 +5,7 @@ type t = VerbShared.verbOutput;
 type multiResult = {
     verb: string,
     analysis: VerbAnalysis.t,
+    warnings: array<string>
 }
 
 let addStem = (stem: string, arr: t): result<t, string> => {
@@ -20,6 +21,7 @@ let addFirstPrefix = (arr: result<t, string>, verb: VerbShared.verbForm): result
             | Some(FirstPrefix.Modal) => arr[firstPrefixPos] = "ḫa"
             | Some(FirstPrefix.Negative) => arr[firstPrefixPos] = "nu"
             | Some(FirstPrefix.NegativeNan) => arr[firstPrefixPos] = "nan"
+            | Some(FirstPrefix.ModalGa) => arr[firstPrefixPos] = "ga"
             | None => ()
             }
             Ok(arr)
@@ -258,6 +260,7 @@ let addObliqueObject = (arr: result<t, string>, verb: VerbShared.verbForm): resu
 }
 
 let print = (verb: VerbShared.verbForm): result<multiResult, string> => {
+    let warnings = [];
     let newArr = Array.make(~length=15, "");
     // builds the array with all the markers
     let outputRes = 
@@ -526,8 +529,35 @@ let print = (verb: VerbShared.verbForm): result<multiResult, string> => {
                             // find previous morpheme
                             switch findPreviousMorpheme(outputArr, finalPersonSuffixPos) {
                                 | Some((marker, _)) => {
-                                    // FIXME: leaving "e" untouched for now
-                                    if (String.length(suffix) > 1 && 
+                                    if suffix === "e" {
+                                        // finds the previous vowel and assimilates the "e"
+                                        switch outputArr[edMarkerPos] {
+                                            | Some(marker) if String.length(marker) > 0 => {
+                                                // CHECK: may need to assimilate the "e" anyway
+                                                // if the "e" of ED marker assimilated to the stem
+                                                outputArr
+                                            }
+                                            | _ => {
+                                                // CHECK: may need to assimilate the "e" anyway
+                                                // to the last vowel of the stem
+                                                if verb.stem->endsWithVowel {
+                                                    let lastVowel = 
+                                                        verb.stem
+                                                        ->String.get(String.length(verb.stem) - 1)
+                                                        ->Option.getExn(~message="Verb stem is missing")
+                                                    // CHECK: the other vowels may assimilate the "e" too
+                                                    if lastVowel === "a" {
+                                                        let _ = outputArr[finalPersonSuffixPos] = lastVowel
+                                                        outputArr
+                                                    } else {
+                                                        outputArr
+                                                    }
+                                                } else {
+                                                    outputArr
+                                                }
+                                            }
+                                        }
+                                    } else if (String.length(suffix) > 1 && 
                                         startsWithVowel(suffix) && 
                                         endsWithVowel(marker)) {
                                         // removes the first character of the suffix
@@ -696,6 +726,56 @@ let print = (verb: VerbShared.verbForm): result<multiResult, string> => {
                                             }
                                         }
                                     }
+                                    | "ga" => {
+                                        // 25.6 The verbal forms with the prefix {ga} have a hybrid make-up, 
+                                        // just like those of the imperative (§25.3). 
+                                        // They have perfective stem forms (§15.3.1) 
+                                        // but they use the final person-prefixes as in the imperfective inflection (§15.2.3).
+                                        if !verb.is_perfective {
+                                            Error("The modal \"ga\" requires a perfective verb form")
+                                        } else if verb.is_transitive {
+                                            // the subject must be first person
+                                            switch verb.finalPersonPrefix {
+                                                | Some(ps) => 
+                                                    switch ps {
+                                                        | FirstSing => {
+                                                            // switches the position of the object
+                                                            switch verb.finalPersonSuffix {
+                                                                | Some(fps) => {
+                                                                    let tempVerb = { ...verb, finalPersonPrefix: Some(fps->fromFPStoFPP)}
+                                                                    switch addFinalPersonPrefix(Ok(outputArr), tempVerb) {
+                                                                        | Error(_) => Error("Error while switching fpp and fps with \"ga\" modal")
+                                                                        | Ok(newOutputArr) => Ok(newOutputArr)
+                                                                    }
+                                                                }
+                                                                | None => {
+                                                                    let _ = outputArr[finalPersonPrefixPos] = ""
+                                                                    Ok(outputArr)
+                                                                }
+                                                            }
+                                                        }
+                                                        | _ => Error("The modal \"ga\" doesn't need a subject")
+                                                    }
+                                                | None => {
+                                                    // 25.6 The final person-prefixes can also be used to refer to the oblique object.
+                                                    switch verb.obliqueObject {
+                                                        | None => Ok(outputArr)
+                                                        | FinalPersonPrefix(_) => Ok(outputArr)
+                                                        | InitialPersonPrefix(ipp) => {
+                                                            // switches the position of the object
+                                                            let tempVerb = { ...verb, finalPersonPrefix: Some(ipp->fromIPPtoFPP)}
+                                                            switch addFinalPersonPrefix(Ok(outputArr), tempVerb) {
+                                                                | Error(_) => Error("Error while switching fpp and fps with \"ga\" modal")
+                                                                | Ok(newOutputArr) => Ok(newOutputArr)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        } else {                                            
+                                            Ok(outputArr)
+                                        }
+                                    }
                                     | _ => Ok(outputArr)
                                 }
                                 }
@@ -711,7 +791,8 @@ let print = (verb: VerbShared.verbForm): result<multiResult, string> => {
                 | Error(err) => Error(err)
                 | Ok(outputArr) => { 
                     verb: outputArr->Js.Array2.joinWith(""),
-                    analysis: outputArr->VerbAnalysis.analyse(verb, VerbAnalysis.new(), 0)
+                    analysis: outputArr->VerbAnalysis.analyse(verb, VerbAnalysis.new(), 0),
+                    warnings
                 }->Ok;
             }
         }

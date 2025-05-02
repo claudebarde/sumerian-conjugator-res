@@ -71,13 +71,6 @@ let isIntransitive = (verb: t): t => {
     {...verb, is_transitive: false}
 }
 
-let setNegative = (verb: t): t => {
-    {...verb, firstPrefix: Some(FirstPrefix.Negative)}
-}
-let resetNegative = (verb: t): t => {
-    {...verb, firstPrefix: None}
-}
-
 let setModal = (verb: t): t => {
     {...verb, firstPrefix: Some(FirstPrefix.Modal)}
 }
@@ -85,9 +78,20 @@ let resetModal = (verb: t): t => {
     {...verb, firstPrefix: None}
 }
 
+let setModalGa = (verb: t): t => {
+    {...verb, firstPrefix: Some(FirstPrefix.ModalGa)}
+}
+let resetModalGa = resetModal
+
+let setNegative = (verb: t): t => {
+    {...verb, firstPrefix: Some(FirstPrefix.Negative)}
+}
+let resetNegative = resetModal
+
 let setNegativeNan = (verb: t): t => {
     {...verb, firstPrefix: Some(FirstPrefix.NegativeNan)}
 }
+let resetNegativeNan = resetModal
 
 let setPreformative = (verb: t, preformative: preformative): t => {
     {...verb, preformative: Some(preformative)}
@@ -212,14 +216,22 @@ let resetComitative = (verb: t): t => {
 
 let setLocativeIn = (verb: t, person: option<personParam>): t => {
     switch (person) {
-        | Some(_) => {...verb, locative: Some(InWithInitialPerson)}
+        | Some(_) => {
+            ...verb, 
+            locative: Some(InWithInitialPerson),
+            // initialPersonPrefix: Some(ps->Utils.fromPersonToIPP)
+        }
         | None => {...verb, locative: Some(InWithoutInitialPerson)}
     }
 }
 
 let setLocativeOn = (verb: t, person: option<personParam>): t => {
     switch (person) {
-        | Some(_) => {...verb, locative: Some(OnWithInitialPerson)}
+        | Some(_) => {
+            ...verb, 
+            locative: Some(OnWithInitialPerson), 
+            // initialPersonPrefix: Some(ps->Utils.fromPersonToIPP)
+        }
         | None => {...verb, locative: Some(OnWithoutInitialPerson)}
     }
 }
@@ -280,6 +292,12 @@ let setObject = (verb: t, person: personParam): t => {
         // but it will mess with the verb building with pipes
         verb
     }
+}
+// resetting the subject and the object is useful
+// when switching between transitive/intransitive and perfective/imperfective
+// on the website
+let resetSubjectObject = (verb: t): t => {
+    {...verb, finalPersonPrefix: None, finalPersonSuffix: None}
 }
 
 let setObliqueObject = (verb: t, person: personParam): t => {

@@ -8,7 +8,7 @@ describe("E verb", () => {
 
     let expectedVerb = "ḫēnnabʔee";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // May he say it to him! 25.4.1 (49)
         let output =
@@ -35,7 +35,7 @@ describe("ʔÈ verb", () => {
 
     let expectedVerb = "ḫamuntaʔède";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He must let it come out of him 16.2.2 (17)
         let output =

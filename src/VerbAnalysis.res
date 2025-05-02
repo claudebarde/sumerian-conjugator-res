@@ -207,6 +207,7 @@ let output = (verb: t): array<(string, string)> => {
             | FirstPrefix.Modal => ("modal", prefix)
             | FirstPrefix.Negative => ("negative", prefix)
             | FirstPrefix.NegativeNan => ("negativeNan", prefix)
+            | FirstPrefix.ModalGa => ("modalGa", prefix)
         }
     };
     let slot2 = switch verb.slot2 {

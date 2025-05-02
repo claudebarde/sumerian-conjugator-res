@@ -8,7 +8,7 @@ describe("ZIG verb", () => {
 
     let expectedVerb = "ibtazig";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // They were raised from these 22.1 (1)
         let output =
@@ -26,7 +26,7 @@ describe("ZIG verb", () => {
 
     let expectedVerb = "nuubtazig";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // It was not raised from it 25.2 (5)
         let output =
@@ -45,7 +45,7 @@ describe("ZIG verb", () => {
 
     let expectedVerb = "nannazi-zige";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He should not raise it against him 25.5 (88)
         let output =
@@ -63,7 +63,7 @@ describe("ZIG verb", () => {
 
     let expectedVerb = "nannēzi-zige";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // (nobody) should not raise it for them 25.5 (89)
         let output =
@@ -88,7 +88,7 @@ describe("ZU verb", () => {
 
   let expectedVerb = "munzu";
   let expectedAnalysis = VerbAnalysis.new();
-  let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+  let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
   test(expectedVerb, () => {
     // He truly knows 22.1 (1)
     let output =
@@ -106,7 +106,7 @@ describe("ZU verb", () => {
 
     let expectedVerb = "ḫēnzu";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // May he know it 25.4.2 (68)
         let output =

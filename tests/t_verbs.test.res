@@ -8,7 +8,7 @@ describe("TAG verb", () => {
 
     let expectedVerb = "bintag";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He let it touch them 18.2.2 (4)
         let output =
@@ -25,6 +25,33 @@ describe("TAG verb", () => {
     })
 })
 
+describe("TAKA verb", () => {
+    open Expect;
+    open FiniteVerb;
+
+    let stem = "taka";
+
+    let expectedVerb = "namminibtaka-takaa";
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
+    test(expectedVerb, () => {
+        // He should not leave it therein! 25.5 (96)
+        let output =
+            new(stem)
+            -> isImperfective(Some(Reduplicate))
+            -> isTransitive
+            -> setSubject(ThirdSingHuman)
+            -> setObject(ThirdSingNonHuman)
+            -> setLocativeIn(None)
+            -> setVentive
+            -> setNegativeNan
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
+})
+
 describe("TEĜ verb", () => {
     open Expect;
     open FiniteVerb;
@@ -33,7 +60,7 @@ describe("TEĜ verb", () => {
 
     let expectedVerb = "nambabteĝe";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He should not approach it 25.5 (92)
         let output =
@@ -59,7 +86,7 @@ describe("TI verb", () => {
 
     let expectedVerb = "baašibtie";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He will let it approach towards you 17.2.1 (6)
         let output =
@@ -78,7 +105,7 @@ describe("TI verb", () => {
 
     let expectedVerb = "labanti";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He did not receive it 22.5 (20)
         let output =
@@ -104,7 +131,7 @@ describe("TUKU verb", () => {
 
     let expectedVerb = "iʔtuku";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // I had it
         let output =
@@ -122,7 +149,7 @@ describe("TUKU verb", () => {
 
     let expectedVerb = "ibtuktukun";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // You have me
         let output =
@@ -140,7 +167,7 @@ describe("TUKU verb", () => {
 
     let expectedVerb = "iitukun";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // You had me
         let output =
@@ -158,7 +185,7 @@ describe("TUKU verb", () => {
 
     let expectedVerb = "ibtuktukuš";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // They have it
         let output =
@@ -176,7 +203,7 @@ describe("TUKU verb", () => {
 
     let expectedVerb = "numuʔdaatuku";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // You do not have it with me 16.2.5 (30)
         let output =
@@ -195,7 +222,7 @@ describe("TUKU verb", () => {
 
     let expectedVerb = "mēdantuku";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He has it with us 16.2.6 (34)
         let output =
@@ -213,7 +240,7 @@ describe("TUKU verb", () => {
 
     let expectedVerb = "ḫaaʔtuku";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // I wish to have her 25.4.2 (69)
         let output =
@@ -239,7 +266,7 @@ describe("TUM", () => {
 
     let expectedVerb = "numundantum";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He was not able to bring it 25.2 (12)
         let output =
@@ -259,7 +286,7 @@ describe("TUM", () => {
 
     let expectedVerb = "ḫamuutum";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // You should bring it 25.4.2 (12)
         let output =
@@ -275,6 +302,25 @@ describe("TUM", () => {
         let { verb, _ } = Result.getExn(output);
         expect(verb) -> toEqual(expected.verb)
     })
+
+    let expectedVerb = "garantum";
+    let expectedAnalysis = VerbAnalysis.new();
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
+    test(expectedVerb, () => {
+        // I will bring him to you 25.6 (113)
+        let output =
+            new(stem)
+            -> isPerfective
+            -> isTransitive
+            -> setSubject(FirstSing)
+            -> setObject(ThirdSingHuman)
+            -> setIndirectObject(SecondSing)
+            -> setModalGa
+            -> print;
+        let _ = expect(Result.isOk(output)) -> toEqual(true);
+        let { verb, _ } = Result.getExn(output);
+        expect(verb) -> toEqual(expected.verb)
+    })
 })
 
 describe("TUŠ", () => {
@@ -285,7 +331,7 @@ describe("TUŠ", () => {
 
     let expectedVerb = "ḫamuʔdantuš";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // She truly sat with me in it 25.4.2 (75)
         let output =

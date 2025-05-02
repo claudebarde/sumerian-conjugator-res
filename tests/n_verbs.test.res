@@ -8,7 +8,7 @@ describe("NAĜ verb", () => {
 
     let expectedVerb = "innaĝ";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He drank it 18.3.2 (65a)
         let output =
@@ -27,7 +27,7 @@ describe("NAĜ verb", () => {
     // TODO: verify that "e" suffix becomes "a" after stem that ends in "a"
     // let expectedVerb = "ibna-naa";
     // let expectedAnalysis = VerbAnalysis.new();
-    // let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    // let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     // test(expectedVerb, () => {
     //     // He is drink it (NA)
     //     let output =
@@ -45,7 +45,7 @@ describe("NAĜ verb", () => {
 
     let expectedVerb = "imunninnaĝ";
     let expectedAnalysis = VerbAnalysis.new();
-    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis };
+    let expected: VerbOutput.multiResult = { verb: expectedVerb, analysis: expectedAnalysis, warnings: [] };
     test(expectedVerb, () => {
         // He let him drink it 18.3.2 (65b)
         let output =
